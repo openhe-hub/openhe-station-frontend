@@ -3,7 +3,7 @@
     <el-menu
         default-active="1"
         class="el-menu-vertical-demo"
-        style="height: 82vh"
+        style="height: 80vh"
     >
       <el-menu-item index="1">
         <el-icon size="100">

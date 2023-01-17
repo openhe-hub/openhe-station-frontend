@@ -4,7 +4,7 @@
       <el-col :span="4" class="header-col">
         <Title></Title>
       </el-col>
-      <el-col :span="10">
+      <el-col :span="20" class="header-col">
         <Header></Header>
       </el-col>
     </el-row>
