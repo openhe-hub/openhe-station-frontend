@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <el-menu
-        default-active="2"
+        default-active="1"
         class="el-menu-vertical-demo"
         style="height: 82vh"
     >
@@ -60,7 +60,7 @@
         </router-link>
       </el-menu-item>
 
-      <el-menu-item index="5">
+      <el-menu-item index="6">
         <el-icon size="100">
           <ChatSquare/>
         </el-icon>
@@ -97,4 +97,13 @@ div.nav-text {
   margin-left: 15px;
 }
 
+.router-link-active {
+  text-decoration: none;
+  color:  #66b1ff;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
 </style>

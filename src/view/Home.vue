@@ -2,12 +2,7 @@
   <div id="container">
     <el-row :gutter="10">
       <el-col :span="4" class="header-col">
-        <div id="title-container">
-          <VueIcon></VueIcon>
-          <div id="title">
-            Openhe Station
-          </div>
-        </div>
+        <Title></Title>
       </el-col>
       <el-col :span="10">
         <Header></Header>
@@ -27,8 +22,9 @@
 
 <script setup>
 import Header from "../components/header/Header.vue";
+import Title from "../components/header/Title.vue";
 import NavBar from "../components/nav/NavBar.vue";
-import VueIcon from "../assets/icon/VueIcon.vue";
+
 </script>
 
 <style scoped>
@@ -37,25 +33,6 @@ div#container {
   width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-}
-
-div#title-container {
-  text-align: center;
-  font-family: "Arial", "Microsoft YaHei", sans-serif;
-  font-size: 20px;
-  font-weight: 350;
-  height: 100%;
-  width: 100%;
-  border: 0px solid black;
-  border-radius: 5px;
-  margin: 10px 0 0 10px;
-  padding: 15px 0px 15px 0px;
-  box-shadow: 1px 1px 5px #000;
-}
-
-div#title {
-  padding-bottom: 10px;
-  display: inline;
 }
 
 .header-col {
