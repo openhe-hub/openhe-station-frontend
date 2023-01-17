@@ -9,66 +9,66 @@
         <el-icon size="100">
           <House/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/index">
           <div class="nav-text">
             Home
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
       <el-menu-item index="2">
         <el-icon size="100">
           <EditPen/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/blog">
           <div class="nav-text">
             Blog
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
       <el-menu-item index="3">
         <el-icon size="100">
           <Wallet/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/resource">
           <div class="nav-text">
-            Reource
+            Resource
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
       <el-menu-item index="4">
         <el-icon size="100">
           <Document/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/data">
           <div class="nav-text">
             Data
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
       <el-menu-item index="5">
         <el-icon size="100">
           <Setting/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/settings">
           <div class="nav-text">
             Settings
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
       <el-menu-item index="5">
         <el-icon size="100">
           <ChatSquare/>
         </el-icon>
-        <template #title>
+        <router-link to="/home/chat">
           <div class="nav-text">
             Chat
           </div>
-        </template>
+        </router-link>
       </el-menu-item>
 
     </el-menu>

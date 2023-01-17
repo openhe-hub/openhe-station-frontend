@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    data page
+  </div>
 </template>
 
 <script>

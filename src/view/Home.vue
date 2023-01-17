@@ -18,7 +18,9 @@
       <el-col :span="4" class="nav-col">
         <NavBar></NavBar>
       </el-col>
-      <el-col :span="20" class="content-col">main content</el-col>
+      <el-col :span="20" class="content-col">
+        <router-view></router-view>
+      </el-col>
     </el-row>
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
   <div>
-    chat page
+    index page
   </div>
 </template>
 
 <script>
 export default {
-  name: "Chat"
+  name: "Index"
 }
 </script>
 

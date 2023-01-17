@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    resource page
+  </div>
 </template>
 
 <script>
