@@ -6,41 +6,71 @@
         style="height: 82vh"
     >
       <el-menu-item index="1">
-        <el-icon>
+        <el-icon size="100">
           <House/>
         </el-icon>
-        <template #title>Home</template>
+        <template #title>
+          <div class="nav-text">
+            Home
+          </div>
+        </template>
       </el-menu-item>
+
       <el-menu-item index="2">
-        <el-icon>
+        <el-icon size="100">
           <EditPen/>
         </el-icon>
-        <template #title>Blog</template>
+        <template #title>
+          <div class="nav-text">
+            Blog
+          </div>
+        </template>
       </el-menu-item>
+
       <el-menu-item index="3">
-        <el-icon>
+        <el-icon size="100">
           <Wallet/>
         </el-icon>
-        <template #title>Resource</template>
+        <template #title>
+          <div class="nav-text">
+            Reource
+          </div>
+        </template>
       </el-menu-item>
+
       <el-menu-item index="4">
-        <el-icon>
+        <el-icon size="100">
           <Document/>
         </el-icon>
-        <template #title>Data</template>
+        <template #title>
+          <div class="nav-text">
+            Data
+          </div>
+        </template>
       </el-menu-item>
+
       <el-menu-item index="5">
-        <el-icon>
+        <el-icon size="100">
           <Setting/>
         </el-icon>
-        <template #title>Settings</template>
+        <template #title>
+          <div class="nav-text">
+            Settings
+          </div>
+        </template>
       </el-menu-item>
+
       <el-menu-item index="5">
-        <el-icon>
+        <el-icon size="100">
           <ChatSquare/>
         </el-icon>
-        <template #title>Chat</template>
+        <template #title>
+          <div class="nav-text">
+            Chat
+          </div>
+        </template>
       </el-menu-item>
+
     </el-menu>
   </div>
 </template>
@@ -59,6 +89,12 @@ div#container {
   margin: 10px 10px 10px 10px;
   padding: 0px 10px 15px 0px;
   box-shadow: 1px 1px 5px #000;
+}
+
+div.nav-text {
+  font-family: Consolas, sans-serif;
+  font-size: 20px;
+  margin-left: 15px;
 }
 
 </style>
