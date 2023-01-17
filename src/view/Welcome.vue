@@ -6,7 +6,7 @@
     <div id="center" class="blur-container">
       <p class="welcome_title">{{ typewriter[0] }}</p>
       <p class="welcome_title">{{ typewriter[1] }}</p>
-      <el-button type="primary" size="large">
+      <el-button type="primary" size="large" @click="toHome">
         Enter
         <el-icon class="el-icon--right">
           <DArrowRight/>
@@ -32,6 +32,7 @@
 import {DArrowRight, Search} from "@element-plus/icons-vue";
 import {computed, onMounted, reactive, ref} from "vue";
 import api from "../plugin/axios/config.js";
+import {useRoute, useRouter} from "vue-router";
 
 // typewriter
 const typewriter = reactive(['', '']);
@@ -93,6 +94,15 @@ const onLeave = () => {
 const isFromShown=computed(()=>{
   return isHover.value;
 })
+
+// listener
+const route=useRoute();
+const router=useRouter();
+const toHome=()=>{
+  router.push('/home');
+}
+
+
 </script>
 
 <style scoped>
@@ -150,7 +160,7 @@ div#sentence-container:hover {
 
 .welcome_title {
   font-family: "Arial", "Microsoft YaHei", sans-serif;
-  font-size: 25px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -159,7 +169,7 @@ div.blur-container {
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   border: 0px solid black;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
