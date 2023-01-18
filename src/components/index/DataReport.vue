@@ -40,11 +40,15 @@ const init = () => {
       {
         data: [10, 22, 28, 23, 19],
         type: 'line',
-        smooth: true
+        smooth: true,
+        animationDuration: 1500,
+        animationEasing: "cubicInOut",
       }, {
         data: [19, 12, 7, 10, 22],
         type: 'line',
-        smooth: true
+        smooth: true,
+        animationDuration: 1500,
+        animationEasing: "cubicInOut",
       }
     ]
   };
@@ -85,7 +89,9 @@ const init = () => {
             name: 'profile'
           }
         ],
-        roseType: 'area'
+        roseType: 'area',
+        animationDuration: 2000,
+        animationEasing: "cubicInOut"
       }
     ]
   };
@@ -102,6 +108,6 @@ div.chart-container {
 }
 
 div#data-container {
-  border-left: 0.5px solid #a6a9ad;
+  border-left: 1px solid #a6a9ad;
 }
 </style>
