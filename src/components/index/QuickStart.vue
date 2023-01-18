@@ -2,7 +2,7 @@
   <div id="quickstart-container">
     <el-row>
       <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="always">
+        <el-card class="box-card" shadow="hover" @click="toBlog">
           <div class="text item">
             <span class="card-title">Start Notes</span>
             <el-button type="danger" :icon="Edit" circle/>
@@ -10,7 +10,7 @@
         </el-card>
       </el-col>
       <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="always">
+        <el-card class="box-card" shadow="hover" @click="toResource">
           <div class="text item"><span class="card-title">Get Resource</span>
             <el-button type="warning" :icon="Cpu" circle/>
           </div>
@@ -19,7 +19,7 @@
     </el-row>
     <el-row>
       <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="always">
+        <el-card class="box-card" shadow="hover" @click="toData">
           <div class="text item">
             <span class="card-title">View Data</span>
             <el-button type="primary" color="#5aa4ae" :icon="DataLine" circle/>
@@ -27,7 +27,7 @@
         </el-card>
       </el-col>
       <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="always">
+        <el-card class="box-card" shadow="hover" @click="toGithub">
           <div class="text item">
             <span class="card-title">My Github</span>
             <el-button type="warning" color="#626aef" :icon="Position" circle/>
@@ -41,6 +41,26 @@
 
 <script setup>
 import {Cpu, DataLine, Edit, Position} from "@element-plus/icons-vue";
+import {useRouter} from "vue-router";
+
+// card click listener
+const router = useRouter();
+
+const toBlog = () => {
+  router.push({path: '/home/blog'});
+}
+
+const toResource = () => {
+  router.push({path: '/home/resource'});
+}
+
+const toData = () => {
+  router.push({path: '/home/data'});
+}
+
+const toGithub = () => {
+  window.open('https://github.com/openhe-hub');
+}
 </script>
 
 <style scoped>
