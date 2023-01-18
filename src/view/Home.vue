@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <el-row :gutter="10">
+    <el-row :gutter="10" class="header-row">
       <el-col :span="4" class="header-col">
         <Title></Title>
       </el-col>
@@ -39,8 +39,13 @@ div#container {
   height: 100%;
 }
 
-.content-row, .content-col, .nav-col {
-  height: 100%;
+.header-row{
+  height: 18vh;
+}
+
+.content-row{
+  height: 82vh;
   text-align: center;
+  padding-bottom: 5px;
 }
 </style>

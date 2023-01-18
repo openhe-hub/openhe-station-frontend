@@ -1,9 +1,9 @@
 <template>
-  <div id="container">
+  <div id="nav-container">
     <el-menu
         default-active="1"
         class="el-menu-vertical-demo"
-        style="height: 80vh"
+        style="height: 100%"
     >
       <el-menu-item index="1">
         <el-icon size="100">
@@ -81,19 +81,20 @@ import {ref} from 'vue'
 </script>
 
 <style scoped>
-div#container {
+div#nav-container {
   overflow-x: hidden;
   overflow-y: hidden;
-  border: 0px solid black;
   border-radius: 5px;
-  margin: 10px 10px 10px 10px;
-  padding: 0px 10px 15px 0px;
-  box-shadow: 1px 1px 5px #000;
+  margin: 0px 10px 0px 10px;
+  padding: 0px 0px 15px 0px;
+  box-shadow: -3px -1px 10px rgba(0,0,0,0.25);
+  height: 77vh;
+  width: 100%;
 }
 
 div.nav-text {
-  font-family: Consolas, sans-serif;
-  font-size: 20px;
+  font-family: "Times New Roman", sans-serif;
+  font-size: 16px;
   margin-left: 15px;
 }
 
@@ -101,6 +102,11 @@ div.nav-text {
   text-decoration: none;
   color:  #66b1ff;
 }
+
+/deep/.is-active{
+  background-color: rgba(178, 199, 227, 0.4);
+}
+
 
 a{
   text-decoration: none;

@@ -11,21 +11,18 @@
 
 <script setup>
 import VueIcon from "../../assets/icon/VueIcon.vue";
-
-
 </script>
 
 <style scoped>
 div#title-container {
   text-align: center;
-  height: 100%;
-  width: 100%;
   border: 0px solid black;
   border-radius: 5px;
   margin: 10px 0 0 10px;
   padding: 15px 0px 12px 0px;
-  box-shadow: 1px 1px 5px #000;
-  background-color: #9aa7b1;
+  box-shadow: -3px -3px 8px rgba(0,0,0,0.25);
+  background-color: white;
+  height: 9vh;
 }
 
 div#title {
