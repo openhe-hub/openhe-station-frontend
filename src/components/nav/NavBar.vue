@@ -3,7 +3,7 @@
     <el-menu
         default-active="1"
         class="el-menu-vertical-demo"
-        style="height: 100%"
+        style="height: 98%"
     >
       <el-menu-item index="1">
         <el-icon size="100">
@@ -72,6 +72,7 @@
       </el-menu-item>
 
     </el-menu>
+    <div id="copyright-container">© 2023 openhe</div>
   </div>
 </template>
 
@@ -87,7 +88,7 @@ div#nav-container {
   border-radius: 5px;
   margin: 0px 10px 0px 10px;
   padding: 0px 0px 15px 0px;
-  box-shadow: -3px -1px 10px rgba(0,0,0,0.25);
+  box-shadow: -3px -1px 10px rgba(0, 0, 0, 0.25);
   height: 77vh;
   width: 100%;
 }
@@ -100,16 +101,20 @@ div.nav-text {
 
 .router-link-active {
   text-decoration: none;
-  color:  #66b1ff;
+  color: #66b1ff;
 }
 
-/deep/.is-active{
+/deep/ .is-active {
   background-color: rgba(178, 199, 227, 0.4);
 }
 
-
-a{
+a {
   text-decoration: none;
   color: black;
+}
+
+div#copyright-container {
+  color: #717374;
+  font-size: 13px;
 }
 </style>
