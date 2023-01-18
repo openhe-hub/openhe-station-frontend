@@ -64,6 +64,14 @@ const toGithub = () => {
 </script>
 
 <style scoped>
+div#quickstart-container {
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin: 5px 10px 10px;
+  padding: 10px;
+  height: 34.5vh;
+}
+
 .box-card {
   width: 15vw;
   margin-top: 15px;

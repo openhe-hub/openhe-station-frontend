@@ -1,8 +1,8 @@
 <template>
   <div id="data-container">
-    <div class="chart-container" ref="chartRef1" style="border-bottom: 0.5px solid #a6a9ad">
+    <div class="chart-container" id="chart-container-1" ref="chartRef1">
     </div>
-    <div class="chart-container" ref="chartRef2">
+    <div class="chart-container" id="chart-container-2" ref="chartRef2">
     </div>
   </div>
 </template>
@@ -28,7 +28,8 @@ const init = () => {
       textStyle:{
         fontFamily: 'Times New Roman',
         fontSize:18,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        fontWeight: 100
       }
     },
     xAxis: {
@@ -59,7 +60,8 @@ const init = () => {
       textStyle:{
         fontFamily: 'Times New Roman',
         fontSize:18,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        fontWeight: 100
       }
     },
     series: [
@@ -103,11 +105,19 @@ const init = () => {
 <style scoped>
 div.chart-container {
   width: 40vw;
-  height: 40vh;
   border-left: 10px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
-div#data-container {
-  border-left: 1px solid #a6a9ad;
+div#chart-container-1{
+  height: 38vh;
 }
+
+div#chart-container-2{
+  height: 38.2vh;
+  margin-top: 1.5vh;
+}
+
 </style>

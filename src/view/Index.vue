@@ -5,7 +5,7 @@
         <el-col>
           <QuickStart></QuickStart>
         </el-col>
-        <el-divider></el-divider>
+<!--        <el-divider></el-divider>-->
         <el-col>
           <Timeline></Timeline>
         </el-col>
@@ -31,7 +31,7 @@ div#index-container {
   padding: 0px 10px 15px 0px;
   width: 81.5vw;
   height: 77vh;
-  border-radius: 5px;
-  box-shadow: -3px -1px 10px rgba(0,0,0,0.25);
+  /*border-radius: 5px;*/
+  /*box-shadow: -3px -1px 10px rgba(0,0,0,0.25);*/
 }
 </style>

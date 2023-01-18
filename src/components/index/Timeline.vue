@@ -1,32 +1,30 @@
 <template>
   <div id="timeline-container">
-    <el-row>
-      <el-col :span="10" v-for="(timeline,idx) in timelines" :key="idx" id="timeline-container">
-        <el-timeline>
-          <el-timeline-item
-              v-for="(activity, index) in timeline"
-              :key="index"
-              :icon="activity.icon"
-              :type="activity.type"
-              :color="activity.color"
-              :size="activity.size"
-              :hollow="activity.hollow"
-              :timestamp="activity.timestamp"
-          >
-            {{ activity.content }}
-          </el-timeline-item>
-        </el-timeline>
-      </el-col>
-      <!--      <el-col :span="10">-->
-
-      <!--      </el-col>-->
-    </el-row>
-
+    <div class="center">
+      <el-row>
+        <el-col :span="10" v-for="(timeline,idx) in timelines" :key="idx">
+          <el-timeline>
+            <el-timeline-item
+                v-for="(activity, index) in timeline"
+                :key="index"
+                :icon="activity.icon"
+                :type="activity.type"
+                :color="activity.color"
+                :size="activity.size"
+                :hollow="activity.hollow"
+                :timestamp="activity.timestamp"
+            >
+              {{ activity.content }}
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {SuccessFilled, Calendar, Sunny} from '@element-plus/icons-vue'
+import {SuccessFilled, Sunny} from '@element-plus/icons-vue'
 
 const timeline1 = [
   {
@@ -71,8 +69,15 @@ const timelines = [timeline1, timeline2];
 
 <style scoped>
 div#timeline-container {
-  margin: 10px;
   padding: 10px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  height: 35vh;
+  margin: 5px 10px;
+}
+
+div.center {
+  margin-top: 6vh;
 }
 
 </style>
