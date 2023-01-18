@@ -3,9 +3,9 @@
     <el-row>
       <el-col :span="12">
         <el-col>
-          <QuickStart></QuickStart>
+          <QuickStart @updateNavId="onNavIdChange"></QuickStart>
         </el-col>
-<!--        <el-divider></el-divider>-->
+        <!--        <el-divider></el-divider>-->
         <el-col>
           <Timeline></Timeline>
         </el-col>
@@ -21,6 +21,11 @@
 import QuickStart from "../components/index/QuickStart.vue";
 import DataReport from "../components/index/DataReport.vue";
 import Timeline from "../components/index/Timeline.vue";
+
+const emit = defineEmits(['updateNavId']);
+const onNavIdChange = (newId) => {
+  emit('updateNavId', newId);
+}
 </script>
 
 <style scoped>

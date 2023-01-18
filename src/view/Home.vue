@@ -11,10 +11,10 @@
     <!--    <el-divider></el-divider>-->
     <el-row :gutter="20" class="content-row">
       <el-col :span="4" class="nav-col">
-        <NavBar></NavBar>
+        <NavBar :activeId="navIdStr" @updateNavId="onNavIdChange"></NavBar>
       </el-col>
       <el-col :span="20" class="content-col">
-        <router-view></router-view>
+        <router-view @updateNavId="onNavIdChange"></router-view>
       </el-col>
     </el-row>
   </div>
@@ -24,6 +24,18 @@
 import Header from "../components/header/Header.vue";
 import Title from "../components/header/Title.vue";
 import NavBar from "../components/nav/NavBar.vue";
+import {computed, inject, ref} from "vue";
+
+const navId = ref(1);
+
+const navIdStr = computed(() => {
+  return `${navId.value}`;
+});
+
+const onNavIdChange = newId => {
+  navId.value = newId;
+}
+
 
 </script>
 
@@ -39,11 +51,11 @@ div#container {
   height: 100%;
 }
 
-.header-row{
+.header-row {
   height: 18vh;
 }
 
-.content-row{
+.content-row {
   height: 82vh;
   text-align: center;
   padding-bottom: 5px;

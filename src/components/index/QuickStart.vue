@@ -43,19 +43,25 @@
 import {Cpu, DataLine, Edit, Position} from "@element-plus/icons-vue";
 import {useRouter} from "vue-router";
 
+// event
+const emit = defineEmits(['updateNavId']);
+
 // card click listener
 const router = useRouter();
 
 const toBlog = () => {
   router.push({path: '/home/blog'});
+  emit('updateNavId', 2);
 }
 
 const toResource = () => {
   router.push({path: '/home/resource'});
+  emit('updateNavId', 3);
 }
 
 const toData = () => {
   router.push({path: '/home/data'});
+  emit('updateNavId', 4);
 }
 
 const toGithub = () => {
