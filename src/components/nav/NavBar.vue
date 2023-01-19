@@ -35,7 +35,7 @@
 
       <el-menu-item index="4" route="/home/data">
         <el-icon size="100">
-          <Document/>
+          <DataAnalysis/>
         </el-icon>
         <div class="nav-text">
           Data

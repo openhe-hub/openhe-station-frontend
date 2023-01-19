@@ -42,13 +42,13 @@ const init = () => {
         data: [10, 22, 28, 23, 19],
         type: 'line',
         smooth: true,
-        animationDuration: 1500,
+        animationDuration: 1600,
         animationEasing: "cubicInOut",
       }, {
         data: [19, 12, 7, 10, 22],
         type: 'line',
         smooth: true,
-        animationDuration: 1500,
+        animationDuration: 1600,
         animationEasing: "cubicInOut",
       }
     ]
@@ -92,7 +92,7 @@ const init = () => {
           }
         ],
         roseType: 'area',
-        animationDuration: 2000,
+        animationDuration: 1600,
         animationEasing: "cubicInOut"
       }
     ]

@@ -9,7 +9,9 @@
           ></Tag>
         </el-row>
         <el-row>
-          <Menu></Menu>
+          <Menu :active-id="'1-1'"
+                :menu="note">
+          </Menu>
         </el-row>
       </el-col>
       <el-col :span="18">
@@ -29,27 +31,28 @@ import {reactive, ref} from "vue";
 
 const note = reactive([
   {
-    groupName: 'aaa',
+    groupName: 'Web',
     passages: [
-      {passageName: 'Vue-3 Study', date: '2022-12-01', tags: ['Vue','Vite']},
-      {passageName: '222', date: '2022-12-01', tags: ['Vue']},
-      {passageName: '333', date: '2022-12-01', tags: []},
+      {passageName: 'Vue-3 Study', date: '2022-12-01', tags: ['Vue', 'Vite']},
+      {passageName: 'VueRouter Study', date: '2022-12-01', tags: ['Vue']},
+      {passageName: 'Axios Study', date: '2022-12-01', tags: []},
     ]
   },
   {
-    groupName: 'bbb',
+    groupName: 'Java',
     passages: [
-      {passageName: '111', date: '2022-12-01', tags: ['Vue']},
-      {passageName: '222', date: '2022-12-01', tags: ['Vue', 'Vite']},
+      {passageName: 'SpringBoot Study', date: '2022-12-01', tags: ['Spring']},
+      {passageName: 'Mybatis Study', date: '2022-12-01', tags: ['Database', 'Sql']},
     ]
   },
   {
-    groupName: 'ccc',
+    groupName: 'Linux',
     passages: [
-      {passageName: '111', date: '2022-12-01', tags: ['Vue']},
+      {passageName: 'Bash Study', date: '2022-12-01', tags: ['bash','linux']},
     ]
   }
-])
+]);
+
 
 // curr value
 const groupName = ref(note[0].groupName);

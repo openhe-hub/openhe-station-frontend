@@ -2,59 +2,60 @@
   <div id="menu-container">
     <el-scrollbar style="height: 100%">
       <el-menu
-          default-active="2"
+          :default-active="activeId"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
       >
-        <el-sub-menu index="1">
+        <el-sub-menu v-for="(subMenu,index) in menu" :index="`${index+1}`">
           <template #title>
             <el-icon>
-              <location/>
+              <FolderOpened v-if="isExpanded[index]"></FolderOpened>
+              <Folder v-else></Folder>
             </el-icon>
-            <span>Navigator One</span>
+            <span>{{subMenu.groupName}}</span>
           </template>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-          <el-menu-item index="1-3">item two</el-menu-item>
-          <el-menu-item index="1-4">item two</el-menu-item>
+          <el-menu-item v-for="(passage,idx) in subMenu.passages" :index="`${index+1}-${idx+1}`">
+            <el-icon>
+              <Document/>
+            </el-icon>
+            {{passage.passageName}}
+          </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon>
-            <icon-menu/>
-          </el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon>
-            <document/>
-          </el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon>
-            <setting/>
-          </el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script setup>
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from '@element-plus/icons-vue'
+import {toRefs} from "vue";
 
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
+// props
+const props = defineProps({
+  activeId: {
+    type: String,
+    default: '1-1',
+  },
+  menu: {
+    type: Array
+  }
+})
+
+const {activeId} = toRefs(props);
+const menu = props.menu;
+const groupNum = menu.length;
+
+// deal with sub-menu expand/collapse
+let isExpanded = [];
+for (let i = 0; i < groupNum; i++) {
+  isExpanded.push(false);
 }
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
+
+const handleOpen = (key) => {
+  isExpanded[parseInt(key) - 1] = true;
+}
+const handleClose = (key) => {
+  isExpanded[parseInt(key) - 1] = false;
 }
 </script>
 
