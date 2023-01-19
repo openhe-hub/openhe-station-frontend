@@ -30,8 +30,6 @@ const onNavIdChange = (newId) => {
 
 <style scoped>
 div#index-container {
-  overflow-x: hidden;
-  overflow-y: hidden;
   margin: 0px 10px 0px 10px;
   padding: 0px 10px 15px 0px;
   width: 81.5vw;

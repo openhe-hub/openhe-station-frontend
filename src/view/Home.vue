@@ -25,8 +25,16 @@ import Header from "../components/header/Header.vue";
 import Title from "../components/header/Title.vue";
 import NavBar from "../components/nav/NavBar.vue";
 import {computed, inject, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
+const route = useRoute();
+const routeTable = ['/home/index', '/home/blog', '/home/resource', '/home/data', '/home/settings', '/home/chat'];
 const navId = ref(1);
+routeTable.forEach((route, idx) => {
+  if (route === useRoute().path) {
+    navId.value = idx + 1;
+  }
+})
 
 const navIdStr = computed(() => {
   return `${navId.value}`;
@@ -43,8 +51,6 @@ const onNavIdChange = newId => {
 div#container {
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .header-col {

@@ -8,7 +8,7 @@
           {{ tag }}
         </el-tag>
       </el-col>
-      <el-col span="8" :offset="1">
+      <el-col :span="8" :offset="1">
         <el-tag type="danger" id="date-container">{{ date }}</el-tag>
       </el-col>
     </el-row>
@@ -47,6 +47,7 @@ const tagSpan = str => {
 div#tag-container {
   margin-left: 10px;
   width: 100%;
+  height: 12vh;
   padding: 10px;
   box-shadow: -3px -3px 8px rgba(0,0,0,0.25);
 
