@@ -63,7 +63,6 @@ div#container {
 
 .content-row {
   height: 82vh;
-  text-align: center;
   padding-bottom: 5px;
 }
 </style>

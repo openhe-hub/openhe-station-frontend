@@ -1,5 +1,5 @@
 import {createApp} from 'vue'
-// Element Plus
+// Element Plus/ Icon
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -8,6 +8,7 @@ import router from './plugin/router/config.js'
 // Axios
 import api from './plugin/axios/config.js'
 
+// App.vue
 import App from './App.vue'
 
 const app = createApp(App);

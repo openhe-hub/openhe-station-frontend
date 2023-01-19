@@ -15,9 +15,7 @@
         </el-row>
       </el-col>
       <el-col :span="18">
-        <Reader>
-
-        </Reader>
+        <Reader></Reader>
       </el-col>
     </el-row>
   </div>
