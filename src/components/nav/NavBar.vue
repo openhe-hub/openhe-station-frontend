@@ -6,57 +6,12 @@
         style="height: 98%"
         @select="onSelect"
     >
-      <el-menu-item index="1" route="/home/index">
+      <el-menu-item v-for="(route,idx) in routeTable" :key="idx" :index="`${idx+1}`" :route="route">
         <el-icon size="100">
-          <House/>
+          <component :is="navIcon[idx]"></component>
         </el-icon>
         <div class="nav-text">
-          Home
-        </div>
-      </el-menu-item>
-
-      <el-menu-item index="2" route="/home/blog">
-        <el-icon size="100">
-          <EditPen/>
-        </el-icon>
-        <div class="nav-text">
-          Blog
-        </div>
-      </el-menu-item>
-
-      <el-menu-item index="3" route="/home/resource">
-        <el-icon size="100">
-          <Wallet/>
-        </el-icon>
-        <div class="nav-text">
-          Resource
-        </div>
-      </el-menu-item>
-
-      <el-menu-item index="4" route="/home/data">
-        <el-icon size="100">
-          <DataAnalysis/>
-        </el-icon>
-        <div class="nav-text">
-          Data
-        </div>
-      </el-menu-item>
-
-      <el-menu-item index="5" route="/home/settings">
-        <el-icon size="100">
-          <Setting/>
-        </el-icon>
-        <div class="nav-text">
-          Settings
-        </div>
-      </el-menu-item>
-
-      <el-menu-item index="6" route="/home/chat">
-        <el-icon size="100">
-          <ChatSquare/>
-        </el-icon>
-        <div class="nav-text">
-          Chat
+          {{ routeName[idx] }}
         </div>
       </el-menu-item>
     </el-menu>
@@ -65,9 +20,13 @@
 </template>
 
 <script setup>
-import {ref, toRefs, watch} from 'vue'
-import router from "../../plugin/router/config.js";
+import {toRefs, watch} from 'vue'
 import {useRouter} from "vue-router";
+
+// route data
+const routeTable = ['/home/index', '/home/blog', '/home/resource', '/home/data', '/home/settings', '/home/chat']
+const routeName = ['Home', 'Blog', 'Resource', 'Data', 'Settings', 'Chat'];
+const navIcon = ['House', 'EditPen', 'Wallet', 'DataAnalysis', 'Setting', 'ChatSquare'];
 
 // props: activeId
 const props = defineProps({
@@ -84,10 +43,9 @@ const onSelect = (index) => {
 }
 
 // watch
-const routeTable = ['', '/home/index', '/home/blog', '/home/resource', '/home/data', '/home/settings', '/home/chat']
 const currRouter = useRouter();
-watch(activeId, (newId, oldId) => {
-  currRouter.push(routeTable[parseInt(newId)]);
+watch(activeId, (newId) => {
+  currRouter.push(routeTable[parseInt(newId) - 1]);
 })
 
 </script>
@@ -97,8 +55,8 @@ div#nav-container {
   overflow-x: hidden;
   overflow-y: hidden;
   border-radius: 5px;
-  margin: 0px 10px 0px 10px;
-  padding: 0px 0px 15px 0px;
+  margin: 0 10px 0 10px;
+  padding: 0 0 15px 0;
   box-shadow: -3px -1px 10px rgba(0, 0, 0, 0.25);
   height: 77vh;
   width: 100%;
@@ -125,7 +83,13 @@ a {
 }
 
 div#copyright-container {
-  color: #717374;
+  color: #898b8c;
   font-size: 13px;
+  text-align: center;
+  transition: color 0.5s;
+}
+
+div#copyright-container:hover{
+  color: #212020;
 }
 </style>
