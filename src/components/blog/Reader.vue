@@ -5,7 +5,7 @@
                preview-theme="vuepress"
                :code-theme="state.theme"
                style="height: 100%"
-    preview-only>
+               preview-only>
     </md-editor>
   </div>
 </template>
@@ -13,17 +13,47 @@
 <script setup>
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css';
-import {reactive, ref} from "vue";
-import markdownText from '../../test/assets/markdown/test.md?raw'
+import {onMounted, reactive, ref, toRefs, watch} from "vue";
 
+// props
+const props = defineProps({
+  path: {
+    type: String
+  }
+});
+const {path} = toRefs(props);
+
+// md-editor-v3 properties
 const state = reactive({
-  text: markdownText,
+  text: '',
   theme: 'github'
 });
+
+// import markdownText from note path
+let notePath = `../../assets/note${path.value}.md?raw`;
+import(notePath)
+    .then(module => {
+      state.text = module.default;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+// update note on path change
+watch(path,(newPath)=>{
+  notePath = `../../assets/note${newPath}.md?raw`;
+  import(notePath)
+      .then(module => {
+        state.text = module.default;
+      })
+      .catch(err => {
+        console.log(err);
+      })
+})
 </script>
 
 <style lang="less" scoped>
-div#reader-container{
+div#reader-container {
   margin-left: 10px;
   margin-right: 10px;
   height: 77.5vh;

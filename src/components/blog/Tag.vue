@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import {toRefs} from "vue";
+import {toRefs, watch} from "vue";
 
 // props
 const props = defineProps({
@@ -37,10 +37,11 @@ const {title, date, tags} = toRefs(props);
 const tagStyle = ['', 'success', 'warning', 'danger']
 // tag length
 const tagSpan = str => {
-  if (str.length<=3) return 5;
-  else if (str.length>5) return 7;
+  if (str.length <= 4) return 5;
+  else if (str.length > 5) return 8;
   else return 6;
 }
+// watch
 </script>
 
 <style scoped lang="less">
@@ -49,12 +50,13 @@ div#tag-container {
   width: 100%;
   height: 12vh;
   padding: 10px;
-  box-shadow: -3px -3px 8px rgba(0,0,0,0.25);
+  box-shadow: -3px -3px 8px rgba(0, 0, 0, 0.25);
 
   #title-container {
     font-family: "Times New Roman", sans-serif;
     font-size: 22px;
     font-weight: 300;
+    text-align: center;
   }
 }
 </style>
