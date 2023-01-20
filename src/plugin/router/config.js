@@ -7,6 +7,8 @@ import Resource from "../../view/Resource.vue";
 import Data from "../../view/Data.vue";
 import Settings from "../../view/Settings.vue";
 import Chat from "../../view/Chat.vue";
+import Projects from "../../components/resource/Projects.vue";
+import Files from "../../components/resource/Files.vue";
 
 const routes = [
     {path: '/', component: Welcome},
@@ -17,7 +19,15 @@ const routes = [
         children: [
             {path: 'index', component: Index},
             {path: 'blog', component: Blog},
-            {path: 'resource', component: Resource},
+            {
+                path: 'resource',
+                component: Resource,
+                redirect: '/home/resource/projects',
+                children: [
+                    {path: 'projects', component: Projects},
+                    {path: 'files', component: Files}
+                ]
+            },
             {path: 'data', component: Data},
             {path: 'settings', component: Settings},
             {path: 'chat', component: Chat},
