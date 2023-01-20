@@ -144,7 +144,7 @@ div#files-container {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
   div#table-container{
-    height: 73vh;
+    height: 71vh;
     width: 80vw;
     padding: 10px;
 
