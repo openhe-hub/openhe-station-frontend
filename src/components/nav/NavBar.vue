@@ -6,7 +6,7 @@
         style="height: 98%"
         @select="onSelect"
     >
-      <el-menu-item v-for="(route,idx) in routeTable" :key="idx" :index="`${idx+1}`" :route="route">
+      <el-menu-item v-for="(route,idx) in routeTable" :key="idx" :index="`${idx+1}`">
         <el-icon size="100">
           <component :is="navIcon[idx]"></component>
         </el-icon>
@@ -36,14 +36,16 @@ const props = defineProps({
 });
 const {activeId} = toRefs(props);
 
+let currRouter = useRouter();
+
 // select
 const emit = defineEmits(['updateNavId']);
 const onSelect = (index) => {
   emit('updateNavId', parseInt(index));
+  currRouter.push(routeTable[parseInt(index) - 1]);
 }
 
 // watch
-const currRouter = useRouter();
 watch(activeId, (newId) => {
   currRouter.push(routeTable[parseInt(newId) - 1]);
 })
@@ -89,7 +91,7 @@ div#copyright-container {
   transition: color 0.5s;
 }
 
-div#copyright-container:hover{
+div#copyright-container:hover {
   color: #212020;
 }
 </style>

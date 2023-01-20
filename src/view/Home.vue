@@ -27,11 +27,11 @@ import NavBar from "../components/nav/NavBar.vue";
 import {computed, inject, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 
-const route = useRoute();
+let route = useRoute();
 const routeTable = ['/home/index', '/home/blog', '/home/resource', '/home/data', '/home/settings', '/home/chat'];
 const navId = ref(1);
 routeTable.forEach((route, idx) => {
-  if (route === useRoute().path) {
+  if (route.split('/')[2] === useRoute().path.split('/')[2]) {
     navId.value = idx + 1;
   }
 })
@@ -42,6 +42,7 @@ const navIdStr = computed(() => {
 
 const onNavIdChange = newId => {
   navId.value = newId;
+  route = useRoute(); //update route
 }
 
 

@@ -20,8 +20,8 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 // handle option change
 // true => projects, false => files
@@ -31,10 +31,15 @@ const onOptionChange = () => {
   console.log(option.value);
   if (!option.value) {
     router.push('/home/resource/files');
-  }else{
+  } else {
     router.push('/home/resource/projects')
   }
 }
+
+onMounted(() => {
+  let route = useRoute();
+  option.value = route.path.split("/")[3] === "projects";
+})
 </script>
 
 <style scoped>
