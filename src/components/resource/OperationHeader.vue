@@ -3,12 +3,12 @@
     <el-row>
       <el-col :span="5">
         <el-switch
-            v-model="option"
+            v-model="isFileShown"
             class="ml-2"
             inline-prompt
             style="--el-switch-on-color: #5bc827; --el-switch-off-color:  #fb4949"
-            active-text="Project"
-            inactive-text="Files"
+            active-text="Files"
+            inactive-text="Projects"
             @change="onOptionChange"
         />
       </el-col>
@@ -26,29 +26,37 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, toRefs} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Download, Plus, Search, Select, Upload} from "@element-plus/icons-vue";
+
+const props = defineProps({
+  isFileShown: {
+    type: Boolean,
+    default: true
+  }
+});
+
+const {isFileShown} = toRefs(props);
 
 const emit = defineEmits(['optionChange']);
 
 // handle option change
-// true => projects, false => files
-const option = ref(true);
+// true => files, false => projects
 const router = useRouter();
 const onOptionChange = () => {
-  if (!option.value) {
+  if (!isFileShown.value) {
     router.push('/home/resource/files');
   } else {
     router.push('/home/resource/projects')
   }
-  emit('optionChange', option.value);
+  emit('optionChange', isFileShown.value);
 }
 
-onMounted(() => {
-  let route = useRoute();
-  option.value = route.path.split("/")[3] === "projects";
-})
+// onMounted(() => {
+//   let route = useRoute();
+//   isFileShown.value = route.path.split("/")[3] === "files";
+// })
 </script>
 
 <style scoped lang="less">

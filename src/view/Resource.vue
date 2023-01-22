@@ -2,14 +2,18 @@
   <div>
     <el-row>
       <el-col :span="10" :offset="1">
-        <OperationHeader @optionChange="onOptionChange">
+        <OperationHeader
+            @optionChange="onOptionChange"
+            :isFileShown="isFileShown"
+        >
         </OperationHeader>
       </el-col>
       <el-col :span="8" :offset="3">
         <Pagination
             @pageChange="onPageChange"
-            :total="tableData.length"
-            :pageSize="length"
+            :total="isFileShown?length1:length2"
+            :pageSize="isFileShown?8:6"
+            :current-page="currentPage"
         >
         </Pagination>
       </el-col>
@@ -26,11 +30,10 @@
 import OperationHeader from "../components/resource/OperationHeader.vue";
 import Pagination from "../components/resource/Pagination.vue";
 import {computed, ref} from "vue";
+import {useRoute} from "vue-router";
 
-let isFileShown = true;
-const beginIdx = ref(0);
-const endIdx = ref(isFileShown ? 8 : 6);
-
+// data
+const isFileShown = ref(true);
 const tableData = [
   {
     name: 'Tom',
@@ -170,8 +173,21 @@ const tableData = [
     status: 'error',
     description: 'this is a brief description',
     operation: 'edit',
+  }, {
+    name: 'Tom',
+    date: '2016-05-03',
+    status: 'error',
+    description: 'this is a brief description',
+    operation: 'edit',
+  }, {
+    name: 'Tom',
+    date: '2016-05-03',
+    status: 'error',
+    description: 'this is a brief description',
+    operation: 'edit',
   }
 ];
+const length1 = tableData.length;
 const projectData = [
   {
     name: 'project-name',
@@ -231,26 +247,33 @@ const projectData = [
     tags: ['Vue', 'Java']
   },
 ];
+const length2 = projectData.length;
+const beginIdx = ref(0);
+const endIdx = ref(isFileShown.value ? 8 : 6);
 let srcData = tableData;
+// refresh position
+let route = useRoute();
+if (route.path.split('/').at(3) === 'projects') {
+  isFileShown.value = false;
+  srcData = projectData;
+}
 
 // handle page change
+let currentPage = ref(1);
 const onPageChange = (currPage) => {
-  beginIdx.value = (currPage - 1) * (isFileShown ? 8 : 6);
-  endIdx.value = currPage * (isFileShown ? 8 : 6);
+  beginIdx.value = (currPage - 1) * (isFileShown.value ? 8 : 6);
+  endIdx.value = currPage * (isFileShown.value ? 8 : 6);
+  currentPage.value = currPage;
 }
+
 // handle option change
 const onOptionChange = (option) => {
-  isFileShown = !option;
-  console.log(isFileShown);
+  isFileShown.value = !option;
   beginIdx.value = 0;
-  endIdx.value = isFileShown ? 8 : 6;
-  srcData = isFileShown ? tableData : projectData;
+  endIdx.value = isFileShown.value ? 8 : 6;
+  srcData = isFileShown.value ? tableData : projectData;
+  currentPage.value = 1;
 }
-
-
-const length = computed(() => {
-  return isFileShown ? 8 : 6;
-})
 </script>
 
 <style lang="less" scoped>

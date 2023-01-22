@@ -4,7 +4,8 @@
         layout="prev, pager, next,jumper"
         @current-change="onPageChange"
         :total="total"
-        :page-size="pageSize">
+        :page-size="pageSize"
+        :current-page="currentPage">
     </el-pagination>
   </div>
 </template>
@@ -21,10 +22,14 @@ const props = defineProps({
   pageSize: {
     type: Number,
     default: 0
+  },
+  currentPage: {
+    type: Number,
+    default: 1
   }
 });
 
-const {total, pageSize} = toRefs(props);
+const {total, pageSize,currentPage} = toRefs(props);
 // emit
 const emit = defineEmits(['pageChange'])
 const onPageChange = (currPage) => {
