@@ -30,17 +30,19 @@ import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Download, Plus, Search, Select, Upload} from "@element-plus/icons-vue";
 
+const emit = defineEmits(['optionChange']);
+
 // handle option change
 // true => projects, false => files
 const option = ref(true);
 const router = useRouter();
 const onOptionChange = () => {
-  console.log(option.value);
   if (!option.value) {
     router.push('/home/resource/files');
   } else {
     router.push('/home/resource/projects')
   }
+  emit('optionChange', option.value);
 }
 
 onMounted(() => {
@@ -50,27 +52,31 @@ onMounted(() => {
 </script>
 
 <style scoped lang="less">
-div#operation-header-container{
+div#operation-header-container {
   border-radius: 10px;
   width: 30vw;
   padding: 5px;
   box-shadow: -3px -1px 10px rgba(0, 0, 0, 0.25);
   margin-bottom: 8px;
   text-align: center;
-  /deep/.el-switch__core{
+
+  /deep/ .el-switch__core {
     height: 23px;
   }
-  /deep/#add-btn{
+
+  /deep/ #add-btn {
     height: 28px;
     width: 28px;
     margin-top: 2px;
   }
-  /deep/#download-btn{
+
+  /deep/ #download-btn {
     height: 30px;
     width: 30px;
     margin-top: 1px;
   }
-  /deep/#multi-btn{
+
+  /deep/ #multi-btn {
     height: 28px;
     margin-top: 2px;
   }

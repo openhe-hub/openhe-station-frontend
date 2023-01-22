@@ -22,7 +22,7 @@ const routes = [
             {
                 path: 'resource',
                 component: Resource,
-                redirect: '/home/resource/projects',
+                redirect: '/home/resource/files',
                 children: [
                     {path: 'projects', component: Projects},
                     {path: 'files', component: Files}

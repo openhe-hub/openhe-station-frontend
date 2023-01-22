@@ -90,13 +90,13 @@ const props = defineProps({
     type: Number,
     default: 5
   },
-  tableData: {
+  data: {
     type: Array,
     default: []
   }
 })
 const {beginIdx, endIdx} = toRefs(props);
-const tableData = props.tableData;
+const tableData = props.data;
 
 // pagination data
 const currData = computed(() => {
