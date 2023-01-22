@@ -1,15 +1,39 @@
 <template>
   <div id="pagination">
-    <el-pagination layout="prev, pager, next" :total="100" />
+    <el-pagination
+        layout="prev, pager, next,jumper"
+        @current-change="onPageChange"
+        :total="total"
+        :page-size="pageSize">
+    </el-pagination>
   </div>
 </template>
 
 <script setup>
+// props
+import {toRefs} from "vue";
 
+const props = defineProps({
+  total: {
+    type: Number,
+    default: 0
+  },
+  pageSize: {
+    type: Number,
+    default: 0
+  }
+});
+
+const {total, pageSize} = toRefs(props);
+// emit
+const emit = defineEmits(['pageChange'])
+const onPageChange = (currPage) => {
+  emit('pageChange', currPage);
+}
 </script>
 
 <style lang="less" scoped>
-div#pagination{
+div#pagination {
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
