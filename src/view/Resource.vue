@@ -36,31 +36,31 @@ import {useRoute} from "vue-router";
 const isFileShown = ref(true);
 const tableData = [
   {
-    name: 'Tom',
+    name: 'Tom111',
     date: '2016-05-03',
     status: 'ok',
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom222',
     date: '2016-05-03',
     status: 'ok',
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom222',
     date: '2016-05-03',
     status: 'ok',
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom333',
     date: '2016-05-03',
     status: 'warning',
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom333',
     date: '2016-05-03',
     status: 'ok',
     description: 'this is a brief description',
@@ -84,7 +84,7 @@ const tableData = [
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom111',
     date: '2016-05-03',
     status: 'error',
     description: 'this is a brief description',
@@ -132,7 +132,7 @@ const tableData = [
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom111',
     date: '2016-05-03',
     status: 'error',
     description: 'this is a brief description',
@@ -174,7 +174,7 @@ const tableData = [
     description: 'this is a brief description',
     operation: 'edit',
   }, {
-    name: 'Tom',
+    name: 'Tom444',
     date: '2016-05-03',
     status: 'error',
     description: 'this is a brief description',

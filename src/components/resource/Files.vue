@@ -55,7 +55,7 @@
         <!--     operation   -->
         <el-table-column prop="operation" label="Operation" min-width="25%">
           <template #header>
-            <el-input v-model="search" size="small" placeholder="filter">
+            <el-input v-model="searchText" size="small" placeholder="filter">
               <template #prefix>
                 <el-icon>
                   <Operation/>
@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import {computed, toRefs} from "vue";
+import {computed, reactive, ref, toRefs, watch, watchEffect} from "vue";
 
 // props: begin index & end index
 const props = defineProps({
@@ -98,12 +98,23 @@ const props = defineProps({
 const {beginIdx, endIdx} = toRefs(props);
 const tableData = props.data;
 
+// search text
+const searchText = ref('');
+
 // pagination data
-const currData = computed(() => {
-  return tableData.slice(beginIdx.value, endIdx.value);
+let currData = reactive(tableData.slice(beginIdx.value, endIdx.value));
+watchEffect(() => {
+  currData.splice(0, currData.length);
+  for (let i = beginIdx.value; i < Math.min(endIdx.value, tableData.length); i++) {
+    if(searchText.value===''){
+      currData.push(tableData[i]);
+    }else{
+      if(tableData[i].name.indexOf(searchText.value)!==-1){
+        currData.push(tableData[i]);
+      }
+    }
+  }
 })
-
-
 </script>
 
 <style lang="less" scoped>
