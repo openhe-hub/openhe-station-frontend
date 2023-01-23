@@ -3,7 +3,11 @@
     <el-row>
       <el-col :span="12">
         <el-col>
-          <QuickStart @updateNavId="onNavIdChange"></QuickStart>
+          <QuickStart
+              :data="data"
+              @updateNavId="onNavIdChange"
+              @clickCard="onClickCard">
+          </QuickStart>
         </el-col>
         <!--        <el-divider></el-divider>-->
         <el-col>
@@ -21,10 +25,63 @@
 import QuickStart from "../components/index/QuickStart.vue";
 import DataReport from "../components/index/DataReport.vue";
 import Timeline from "../components/index/Timeline.vue";
+import {reactive} from "vue";
+import {useRouter} from "vue-router";
 
 const emit = defineEmits(['updateNavId']);
 const onNavIdChange = (newId) => {
   emit('updateNavId', newId);
+}
+
+// data for quick start
+// data
+const data = reactive([{
+  title: "Start Notes",
+  icon: "Edit",
+  color: "#f56c6c",
+  method: "toBlog"
+}, {
+  title: "Get Resource",
+  icon: "Cpu",
+  color: "#e6a23c",
+  method: "toResource"
+
+}, {
+  title: "View Data",
+  icon: "DataLine",
+  color: "#5aa4ae",
+  method: "toData"
+}, {
+  title: "My Github",
+  icon: "Position",
+  color: "#626aef",
+  method: "toGithub"
+}]);
+
+let router = useRouter();
+const onClickCard = idx => {
+  console.log(idx);
+  switch (idx) {
+    case 0: {
+      router.push({path: '/home/blog'});
+      emit('updateNavId', 2);
+      break;
+    }
+    case 1: {
+      router.push({path: '/home/resource'});
+      emit('updateNavId', 3);
+      break;
+    }
+    case 2: {
+      router.push({path: '/home/data'});
+      emit('updateNavId', 4);
+      break;
+    }
+    case 3: {
+      window.open('https://github.com/openhe-hub');
+      break;
+    }
+  }
 }
 </script>
 

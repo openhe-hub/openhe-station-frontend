@@ -1,72 +1,40 @@
 <template>
   <div id="quickstart-container">
-    <el-row>
-      <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="hover" @click="toBlog">
+    <el-row v-for="i in [0,1]" :key="i">
+      <el-col v-for="(card,index) in data.slice(i*2,(i+1)*2)" :key="index" :span="11" :offset="1">
+        <el-card class="box-card" shadow="hover" @click="onClickCard(index+i*2)">
           <div class="text item">
-            <span class="card-title">Start Notes</span>
-            <el-button type="danger" :icon="Edit" circle/>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="hover" @click="toResource">
-          <div class="text item"><span class="card-title">Get Resource</span>
-            <el-button type="warning" :icon="Cpu" circle/>
+            <span class="card-title">{{ card.title }}</span>
+            <el-button :color="card.color" :icon="card.icon" circle/>
           </div>
         </el-card>
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="hover" @click="toData">
-          <div class="text item">
-            <span class="card-title">View Data</span>
-            <el-button type="primary" color="#5aa4ae" :icon="DataLine" circle/>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="11" :offset="1">
-        <el-card class="box-card" shadow="hover" @click="toGithub">
-          <div class="text item">
-            <span class="card-title">My Github</span>
-            <el-button type="warning" color="#626aef" :icon="Position" circle/>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-
   </div>
 </template>
 
 <script setup>
 import {Cpu, DataLine, Edit, Position} from "@element-plus/icons-vue";
 import {useRouter} from "vue-router";
+import {reactive} from "vue";
+
+const props = defineProps({
+  data: {
+    type: Array
+  }
+});
+
+const data = props.data;
 
 // event
-const emit = defineEmits(['updateNavId']);
+const emit = defineEmits(['updateNavId', 'clickCard']);
 
-// card click listener
-const router = useRouter();
-
-const toBlog = () => {
-  router.push({path: '/home/blog'});
-  emit('updateNavId', 2);
+const onClickCard = (index) => {
+  console.log(index);
+  emit("clickCard", index);
 }
 
-const toResource = () => {
-  router.push({path: '/home/resource'});
-  emit('updateNavId', 3);
-}
 
-const toData = () => {
-  router.push({path: '/home/data'});
-  emit('updateNavId', 4);
-}
-
-const toGithub = () => {
-  window.open('https://github.com/openhe-hub');
-}
 </script>
 
 <style scoped>
