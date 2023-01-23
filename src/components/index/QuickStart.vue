@@ -14,16 +14,11 @@
 </template>
 
 <script setup>
-import {Cpu, DataLine, Edit, Position} from "@element-plus/icons-vue";
-import {useRouter} from "vue-router";
-import {reactive} from "vue";
-
 const props = defineProps({
   data: {
     type: Array
   }
 });
-
 const data = props.data;
 
 // event

@@ -34,8 +34,8 @@ const onNavIdChange = (newId) => {
 }
 
 // data for quick start
-// data
-const data = reactive([{
+const data = reactive([
+    {
   title: "Start Notes",
   icon: "Edit",
   color: "#f56c6c",
