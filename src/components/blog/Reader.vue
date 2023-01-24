@@ -40,7 +40,7 @@ import(notePath)
     })
 
 // update note on path change
-watch(path,(newPath)=>{
+watch(path, (newPath) => {
   notePath = `../../assets/note${newPath}.md?raw`;
   import(notePath)
       .then(module => {
