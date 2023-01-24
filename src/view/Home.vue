@@ -5,7 +5,7 @@
         <Title></Title>
       </el-col>
       <el-col :span="20" class="header-col">
-        <Header></Header>
+        <Header @routeChange="onNavIdChange"></Header>
       </el-col>
     </el-row>
     <!--    <el-divider></el-divider>-->

@@ -24,10 +24,9 @@
               More
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>Blog</el-dropdown-item>
-                  <el-dropdown-item>Resource</el-dropdown-item>
-                  <el-dropdown-item>Settings</el-dropdown-item>
-                  <el-dropdown-item>Chat</el-dropdown-item>
+                  <el-dropdown-item v-for="(item,index) in list" :key="index" @click="onItemClick(index)">
+                    <router-link :to="item.route">{{ item.name }}</router-link>
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -47,6 +46,19 @@ import {Message, Search} from "@element-plus/icons-vue";
 import {ref} from "vue";
 import avatar from '../../assets/img/avatar.jpg'
 
+const emit = defineEmits(['routeChange']);
+
+const onItemClick = (index) => {
+  emit('routeChange', list[index].index);
+}
+
+const list = [
+  {name: 'Blog', route: '/home/blog', index: 2},
+  {name: 'Resource', route: '/home/resource', index: 3},
+  {name: 'Settings', route: '/home/settings', index: 5},
+  {name: 'Chat', route: '/home/chat', index: 6},
+]
+
 const searchText = ref();
 </script>
 
@@ -56,7 +68,7 @@ div#header-container {
   border-radius: 5px;
   margin: 10px 0px 10px 10px;
   padding: 15px 0px 12px 10px;
-  box-shadow: -2px -3px 8px rgba(0,0,0,0.25);
+  box-shadow: -2px -3px 8px rgba(0, 0, 0, 0.25);
   background-color: white;
   height: 9vh;
 }
@@ -66,7 +78,7 @@ div#header-container {
   font-family: "Arial", "Microsoft YaHei", sans-serif;
   margin-top: 10px;
   margin-left: 20px;
-  color:  #b25252;
+  color: #b25252;
   font-style: italic;
 }
 
@@ -77,5 +89,19 @@ div#search-container {
 
 div#msg-container {
   display: inline-block;
+}
+
+.router-link-active {
+  text-decoration: none;
+  color: black;
+}
+
+/deep/ .is-active {
+  background-color: rgba(178, 199, 227, 0.4);
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 </style>
