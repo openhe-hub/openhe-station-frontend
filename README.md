@@ -9,7 +9,7 @@
 ## Introduction
 This project is the front-end section for [openhe-station](http://www.openhe-station.com/)
 , a personal website.  
-* Tech Stack: Vue3+Vite2+VueRouter+Axios+Echarts
+* Tech Stack: Vue3+Vite2+VueRouter+ElementPlus+Axios+Echarts
 * Function: blog, resource download, project view, data management, chat
 * Visiting URL: http://www.openhe-station.com/
 ## Run
