@@ -1,6 +1,7 @@
 # Openhe Station Frontend Project
 ![](https://img.shields.io/badge/lang-Vue3-lightgreen.svg?style=flat)
-![](https://img.shields.io/badge/build-Vite-cyan.svg?style=flat)
+![](https://img.shields.io/badge/build-Vite-8678fe.svg?style=flat)
+![](https://img.shields.io/badge/ui-ElementPlus-cyan.svg?style=flat)
 ![](https://img.shields.io/badge/plugin-VueRouter-red.svg?style=flat)
 ![](https://img.shields.io/badge/plugin-Axios-red.svg?style=flat)
 ![](https://img.shields.io/badge/plugin-ECharts-red.svg?style=flat)
