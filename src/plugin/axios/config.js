@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api=axios.create({
-    // baseURL:"http://www.openhe-station.com/",
+    // baseURL:"http://localhost:8080/api/",
     timeout: 5000
 });
 

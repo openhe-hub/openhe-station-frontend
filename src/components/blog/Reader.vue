@@ -14,6 +14,25 @@
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css';
 import {onMounted, reactive, ref, toRefs, watch} from "vue";
+import api from "../../plugin/axios/config.js";
+
+// load data
+onMounted(() => {
+  api({
+    url: '/api/note/passage',
+    method: 'post',
+    data: {
+      groupIdx: 0,
+      passageIdx: 0
+    }
+  }).then(resp => {
+    console.log(resp);
+    state.text = resp.data;
+  }).catch(err => {
+    console.log(err);
+  })
+})
+
 
 // props
 const props = defineProps({

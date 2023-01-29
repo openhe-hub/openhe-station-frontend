@@ -29,8 +29,21 @@
 </template>
 
 <script setup>
-import {toRefs} from "vue";
+import {onMounted, toRefs} from "vue";
 import noteConfig from "../../plugin/note/note.config.js";
+import api from "../../plugin/axios/config.js";
+
+// load data
+onMounted(() => {
+  api({
+    url: '/api/note/structure',
+    method: 'get',
+  }).then(resp => {
+    console.log(resp);
+  }).catch(err => {
+    console.log(err);
+  })
+})
 
 // props
 const props = defineProps({
