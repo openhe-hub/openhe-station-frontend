@@ -3,10 +3,9 @@
     <el-row>
       <el-col :span="6">
         <el-row>
-          <Tag :title="passageName"
-               :date="date"
-               :tags="tags"
-          ></Tag>
+          <Tag :groupIdx="groupIdx"
+              :passageIdx="passageIdx">
+          </Tag>
         </el-row>
         <el-row>
           <Menu :active-id="'1-1'"
@@ -28,9 +27,6 @@ import Reader from "../components/blog/Reader.vue";
 import {reactive, ref} from "vue";
 
 // curr value
-const passageName = ref('Vue-3 Basic');
-const date = ref('2022-12-01');
-let tags = reactive(['Vue']);
 const groupIdx = ref(0);
 const passageIdx = ref(0);
 

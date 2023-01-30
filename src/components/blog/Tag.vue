@@ -1,37 +1,62 @@
 <template>
   <div id="tag-container">
-    <div id="title-container">{{ title }}</div>
+    <div id="title-container">{{ info.name }}</div>
     <hr>
     <el-row>
-      <el-col :span="tagSpan(tag)" :offset="1" v-for="(tag,index) in tags">
+      <el-col :span="tagSpan(tag)" :offset="1" v-for="(tag,index) in info.tags">
         <el-tag class="ml-2" :type="tagStyle[index]">
           {{ tag }}
         </el-tag>
       </el-col>
       <el-col :span="8" :offset="1">
-        <el-tag type="danger" id="date-container">{{ date }}</el-tag>
+        <el-tag type="danger" id="date-container">{{ info.date }}</el-tag>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script setup>
-import {toRefs, watch} from "vue";
+import {onMounted, reactive, toRefs, watch, watchEffect} from "vue";
+import api from "../../plugin/axios/config.js";
 
 // props
 const props = defineProps({
-  title: {
-    type: String
+  groupIdx: {
+    type: Number
   },
-  date: {
-    type: String
-  },
-  tags: {
-    type: Array,
-    default: []
+  passageIdx: {
+    type: Number
   }
 });
-const {title, date, tags} = toRefs(props);
+const {groupIdx, passageIdx} = toRefs(props);
+
+// load data
+let info = reactive({
+  name: '',
+  date: '',
+  tags: []
+});
+
+const update = () => {
+  api({
+    url: '/api/note/info',
+    method: 'post',
+    data: {
+      groupIdx: groupIdx.value,
+      passageIdx: passageIdx.value
+    }
+  }).then(resp => {
+    console.log(resp)
+    info.name = resp.data.name;
+    info.date = resp.data.date.slice(0, 10);
+    info.tags = resp.data.tags.split(',');
+  }).catch(err => {
+    console.log(err);
+  })
+}
+onMounted(() => {
+  update();
+})
 
 // tag style
 const tagStyle = ['', 'success', 'warning', 'danger']
@@ -41,7 +66,11 @@ const tagSpan = str => {
   else if (str.length > 5) return 8;
   else return 6;
 }
+
 // watch
+watchEffect(() => {
+  update();
+})
 </script>
 
 <style scoped lang="less">
