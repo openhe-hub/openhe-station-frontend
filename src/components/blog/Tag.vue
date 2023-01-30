@@ -38,18 +38,26 @@ let info = reactive({
 });
 
 const update = () => {
+  // api({
+  //   url: '/api/note/info',
+  //   method: 'post',
+  //   data: {
+  //     groupIdx: groupIdx.value,
+  //     passageIdx: passageIdx.value
+  //   }
+  // }).then(resp => {
+  //   console.log(resp)
+  //   info.name = resp.data.name;
+  //   info.date = resp.data.date.slice(0, 10);
+  //   info.tags = resp.data.tags.split(',');
+  // }).catch(err => {
+  //   console.log(err);
+  // })
   api({
-    url: '/api/note/info',
-    method: 'post',
-    data: {
-      groupIdx: groupIdx.value,
-      passageIdx: passageIdx.value
-    }
+    url: '/api/test',
+    method: 'get'
   }).then(resp => {
     console.log(resp)
-    info.name = resp.data.name;
-    info.date = resp.data.date.slice(0, 10);
-    info.tags = resp.data.tags.split(',');
   }).catch(err => {
     console.log(err);
   })
