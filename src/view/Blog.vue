@@ -15,7 +15,7 @@
         </el-row>
       </el-col>
       <el-col :span="18">
-        <Reader :path="path"></Reader>
+        <Reader :groupIdx="groupIdx" :passageIdx="passageIdx"></Reader>
       </el-col>
     </el-row>
   </div>
@@ -31,14 +31,13 @@ import {reactive, ref} from "vue";
 const passageName = ref('Vue-3 Basic');
 const date = ref('2022-12-01');
 let tags = reactive(['Vue']);
+const groupIdx = ref(0);
+const passageIdx = ref(0);
 
 // handle note change
-const path = ref('/web/note1');
-const onNoteChange = (newPath, tag) => {
-  path.value = newPath;
-  passageName.value = tag.passageName;
-  date.value = tag.date;
-  tags = tag.tags;
+const onNoteChange = (param) => {
+  groupIdx.value = param[0];
+  passageIdx.value = param[1];
 }
 </script>
 

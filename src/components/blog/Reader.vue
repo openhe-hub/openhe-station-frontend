@@ -13,34 +13,38 @@
 <script setup>
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css';
-import {onMounted, reactive, ref, toRefs, watch} from "vue";
+import {onMounted, reactive, ref, toRefs, watch, watchEffect} from "vue";
 import api from "../../plugin/axios/config.js";
 
+// props
+const props = defineProps({
+  groupIdx: {
+    type: Number
+  },
+  passageIdx: {
+    type: Number
+  }
+});
+const {groupIdx, passageIdx} = toRefs(props);
+
 // load data
-onMounted(() => {
+const update = () => {
   api({
     url: '/api/note/passage',
     method: 'post',
     data: {
-      groupIdx: 0,
-      passageIdx: 0
+      'groupIdx': groupIdx.value,
+      'passageIdx': passageIdx.value
     }
   }).then(resp => {
-    console.log(resp);
     state.text = resp.data;
   }).catch(err => {
     console.log(err);
   })
+}
+onMounted(() => {
+  update();
 })
-
-
-// props
-const props = defineProps({
-  path: {
-    type: String
-  }
-});
-const {path} = toRefs(props);
 
 // md-editor-v3 properties
 const state = reactive({
@@ -48,26 +52,9 @@ const state = reactive({
   theme: 'github'
 });
 
-// import markdownText from note path
-let notePath = `../../assets/note${path.value}.md?raw`;
-import(notePath)
-    .then(module => {
-      state.text = module.default;
-    })
-    .catch(err => {
-      console.log(err);
-    })
-
-// update note on path change
-watch(path, (newPath) => {
-  notePath = `../../assets/note${newPath}.md?raw`;
-  import(notePath)
-      .then(module => {
-        state.text = module.default;
-      })
-      .catch(err => {
-        console.log(err);
-      })
+// watch change
+watchEffect(() => {
+  update();
 })
 </script>
 

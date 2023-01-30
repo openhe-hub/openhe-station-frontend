@@ -8,19 +8,19 @@
           @close="handleClose"
           @select="onSelect"
       >
-        <el-sub-menu v-for="(group,index) in noteConfig" :key="index" :index="`${index+1}`">
+        <el-sub-menu v-for="(group,index) in structure" :key="index" :index="`${index+1}`">
           <template #title>
             <el-icon>
               <FolderOpened v-if="isExpanded[index]"></FolderOpened>
               <Folder v-else></Folder>
             </el-icon>
-            <span>{{ group.groupName }}</span>
+            <span>{{ group.name }}</span>
           </template>
-          <el-menu-item v-for="(passage,idx) in group.passages" :key="idx" :index="`${index+1}-${idx+1}`">
+          <el-menu-item v-for="(note,idx) in group.notes" :key="idx" :index="`${index+1}-${idx+1}`">
             <el-icon>
               <Document/>
             </el-icon>
-            {{ passage.passageName }}
+            {{ note.name }}
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
@@ -29,35 +29,35 @@
 </template>
 
 <script setup>
-import {onMounted, toRefs} from "vue";
-import noteConfig from "../../plugin/note/note.config.js";
+import {onMounted, reactive, toRefs} from "vue";
 import api from "../../plugin/axios/config.js";
-
-// load data
-onMounted(() => {
-  api({
-    url: '/api/note/structure',
-    method: 'get',
-  }).then(resp => {
-    console.log(resp);
-  }).catch(err => {
-    console.log(err);
-  })
-})
 
 // props
 const props = defineProps({
   activeId: {
     type: String,
     default: '1-1',
-  },
-  menu: {
-    type: Array
   }
 })
 
+// load data
+let structure = reactive([]);
+
+onMounted(() => {
+  api({
+    url: '/api/note/structure',
+    method: 'get',
+  }).then(resp => {
+    resp.data.forEach(i => structure.push(i));
+  }).catch(err => {
+    console.log(err);
+  })
+})
+
+
+
 const {activeId} = toRefs(props);
-const groupNum = noteConfig.length;
+const groupNum = structure.length;
 
 // deal with sub-menu expand/collapse
 let isExpanded = [];
@@ -76,24 +76,10 @@ const handleClose = (key) => {
 const emit = defineEmits(['noteChange']);
 const onSelect = (index) => {
   let indices = index.split('-');
-  let path = '';
-  let tag = {passageName: "", date: "2022-12-01", tags: ['Vue', 'Vite']};
-  for (let i in noteConfig) {
-    if (parseInt(i) + 1 === parseInt(indices[0])) {
-      path += noteConfig[i].path
-      for (let j = 0; j < noteConfig[i].passages.length; j++) {
-        if (j + 1 === parseInt(indices[1])) {
-          path += noteConfig[i].passages[j].path;
-          tag.passageName = noteConfig[i].passages[j].passageName;
-          tag.date = noteConfig[i].passages[j].date;
-          tag.tags = noteConfig[i].passages[j].tags;
-          break;
-        }
-      }
-      break;
-    }
-  }
-  emit('noteChange', path, tag);
+  let params = [];
+  indices.forEach(i => params.push(parseInt(i) - 1));
+  console.log(params);
+  emit('noteChange', params);
 }
 </script>
 
