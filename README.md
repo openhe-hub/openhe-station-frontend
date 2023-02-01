@@ -12,6 +12,7 @@ This project is the front-end section for [openhe-station](http://www.openhe-sta
 * Tech Stack: Vue3+Vite2+VueRouter+ElementPlus+Axios+Echarts
 * Function: blog, resource download, project view, data management, chat
 * Visiting URL: http://www.openhe-station.com/
+* View Backend Project: https://github.com/openhe-hub/openhe-station-backend.git
 ## Run
 ```bash
 git clone https://github.com/openhe-hub/openhe-station-frontend.git
