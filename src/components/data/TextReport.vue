@@ -34,7 +34,6 @@ const flash = () => {
     for (let i = 0; i < report.length; i++) {
       nums[i] += Math.floor(report[i].num / total);
     }
-    console.log(nums);
     cnt++;
     timer = setTimeout(() => {
       flash();

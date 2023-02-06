@@ -15,7 +15,7 @@
           <QuickStart
               @clickCard="onClickCard"
               :data="data"
-          style="height: 31.5vh">
+              style="height: 31.5vh">
           </QuickStart>
         </el-col>
       </el-col>
@@ -23,6 +23,11 @@
         <DataReport></DataReport>
       </el-col>
     </el-row>
+    <NewNoteDialog
+        :new-note-dialog-visible="newNoteDialogVisible"
+        @newFileSubmit="onNewFileSubmit"
+        @cancel="onCancel">
+    </NewNoteDialog>
   </div>
 </template>
 
@@ -30,9 +35,10 @@
 import DataReport from "../components/index/DataReport.vue";
 import TextReport from "../components/data/TextReport.vue";
 import QuickStart from "../components/index/QuickStart.vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
 import CalendarComponent from "../components/data/CalendarComponent.vue";
+import NewNoteDialog from "../components/data/dialog/NewNoteDialog.vue";
 
 // data for quick start
 const data = reactive([
@@ -48,12 +54,12 @@ const data = reactive([
     method: "toResource"
 
   }, {
-    title: "New Project",
+    title: "New Folder",
     icon: "FolderAdd",
     color: "#5aa4ae",
     method: "toData"
   }, {
-    title: "New Data",
+    title: "New Project",
     icon: "CirclePlusFilled",
     color: "#626aef",
     method: "toGithub"
@@ -63,8 +69,7 @@ const onClickCard = idx => {
   console.log(idx);
   switch (idx) {
     case 0: {
-      router.push({path: '/home/blog'});
-      emit('updateNavId', 2);
+      newNoteDialogVisible.value = true;
       break;
     }
     case 1: {
@@ -100,6 +105,18 @@ const report = reactive([
     num: 7
   }]);
 
+// data for dialog
+// 1. new note
+const newNoteDialogVisible = ref(false);
+
+
+const onNewFileSubmit = (noteInfo) => {
+  newNoteDialogVisible.value = false;
+}
+
+const onCancel=()=>{
+  newNoteDialogVisible.value = false;
+}
 </script>
 
 <style lang="less" scoped>
