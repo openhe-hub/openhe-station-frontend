@@ -25,7 +25,6 @@ const data = props.data;
 const emit = defineEmits(['updateNavId', 'clickCard']);
 
 const onClickCard = (index) => {
-  console.log(index);
   emit("clickCard", index);
 }
 

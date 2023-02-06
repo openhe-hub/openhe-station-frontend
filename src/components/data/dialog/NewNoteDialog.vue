@@ -38,7 +38,7 @@
 
 import {reactive, ref, toRefs, watchEffect} from "vue";
 
-const emit = defineEmits(['newFileSubmit','cancel']);
+const emit = defineEmits(['newFileSubmit','cancelFileDialog']);
 
 const props = defineProps({
   newNoteDialogVisible: {
@@ -67,7 +67,7 @@ const onConfirm = () => {
 
 const onCancel=()=>{
   visible.value = false;
-  emit('cancel');
+  emit('cancelFileDialog');
 }
 </script>
 

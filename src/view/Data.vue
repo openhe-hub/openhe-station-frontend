@@ -26,8 +26,13 @@
     <NewNoteDialog
         :new-note-dialog-visible="newNoteDialogVisible"
         @newFileSubmit="onNewFileSubmit"
-        @cancel="onCancel">
+        @cancelFileDialog="onFileDialogCancel">
     </NewNoteDialog>
+    <NewFolderDialog
+        :new-folder-dialog-visible="newFolderDialogVisible"
+        @newFolderSubmit="onNewFolderSubmit"
+        @cancelFolderDialog="onFolderDialogCancel">
+    </NewFolderDialog>
   </div>
 </template>
 
@@ -39,6 +44,7 @@ import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
 import CalendarComponent from "../components/data/CalendarComponent.vue";
 import NewNoteDialog from "../components/data/dialog/NewNoteDialog.vue";
+import NewFolderDialog from "../components/data/dialog/NewFolderDialog.vue";
 
 // data for quick start
 const data = reactive([
@@ -66,24 +72,21 @@ const data = reactive([
   }]);
 let router = useRouter();
 const onClickCard = idx => {
-  console.log(idx);
   switch (idx) {
     case 0: {
       newNoteDialogVisible.value = true;
       break;
     }
     case 1: {
-      router.push({path: '/home/resource'});
-      emit('updateNavId', 3);
+      router.push({path: '/home/resource/files'});
       break;
     }
     case 2: {
-      router.push({path: '/home/data'});
-      emit('updateNavId', 4);
+      newFolderDialogVisible.value = true;
       break;
     }
     case 3: {
-      window.open('https://github.com/openhe-hub');
+      router.push({path: '/home/resource/projects'});
       break;
     }
   }
@@ -108,15 +111,25 @@ const report = reactive([
 // data for dialog
 // 1. new note
 const newNoteDialogVisible = ref(false);
+const newFolderDialogVisible = ref(false);
 
 
 const onNewFileSubmit = (noteInfo) => {
   newNoteDialogVisible.value = false;
 }
 
-const onCancel=()=>{
+const onNewFolderSubmit = (folderInfo) => {
+  newFolderDialogVisible.value = false;
+}
+
+const onFileDialogCancel = () => {
   newNoteDialogVisible.value = false;
 }
+
+const onFolderDialogCancel = () => {
+  newFolderDialogVisible.value = false;
+}
+
 </script>
 
 <style lang="less" scoped>
