@@ -6,7 +6,7 @@
           <el-input v-model="noteInfo.name" autocomplete="off" placeholder="Input filename"/>
         </el-form-item>
         <el-form-item label="Folder">
-          <el-select v-model="noteInfo.folder" placeholder="Select a folder">
+          <el-select v-model="noteInfo.path" placeholder="Select a folder">
             <el-option label="Web" value="web"/>
             <el-option label="Java" value="java"/>
             <el-option label="Linux" value="linux"/>
@@ -21,13 +21,23 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="Tags">
-          <el-input v-model="noteInfo.tag" placeholder="Input tags, use comma to separate" autocomplete="off"/>
+          <el-input v-model="noteInfo.tags" placeholder="Input tags, use comma to separate" autocomplete="off"/>
+        </el-form-item>
+        <el-form-item label="File">
+          <el-upload
+              ref="fileRef"
+              :auto-upload="false"
+              :http-request="uploadNewFile">
+            <el-button type="primary">
+              Upload markdown file
+            </el-button>
+          </el-upload>
         </el-form-item>
       </el-form>
       <template #footer>
       <span class="dialog-footer">
         <el-button type="danger" @click="onCancel">Cancel</el-button>
-        <el-button type="primary" @click="onConfirm">Confirm</el-button>
+        <el-button type="success" @click="onConfirm">OK</el-button>
       </span>
       </template>
     </el-dialog>
@@ -37,9 +47,11 @@
 <script setup>
 
 import {reactive, ref, toRefs, watchEffect} from "vue";
+import api from "../../../plugin/axios/config.js";
 
-const emit = defineEmits(['newFileSubmit','cancelFileDialog']);
+const emit = defineEmits(['newFileSubmit', 'cancelFileDialog']);
 
+// data
 const props = defineProps({
   newNoteDialogVisible: {
     type: Boolean,
@@ -52,22 +64,45 @@ const visible = ref(newNoteDialogVisible.value);
 let noteInfo = reactive({
   name: "",
   date: "",
-  tag: [],
-  folder: ""
+  tags: "",
+  path: "",
 });
+let fileRef = ref();
 
 watchEffect(() => {
   visible.value = newNoteDialogVisible.value;
 })
 
+// confirm / cancel
 const onConfirm = () => {
   visible.value = false;
   emit('newFileSubmit', noteInfo);
+  fileRef.value.submit();
 }
 
-const onCancel=()=>{
+const onCancel = () => {
   visible.value = false;
   emit('cancelFileDialog');
+}
+
+// upload new file
+
+const uploadNewFile = (params) => {
+  let formData = new FormData();
+  formData.append("name", noteInfo.name);
+  formData.append("tags", noteInfo.tags);
+  formData.append("path", noteInfo.path);
+  formData.append("date", noteInfo.date);
+  formData.append("file", params.file);
+  api({
+    url: "/api/note/new_note",
+    method: "post",
+    data: formData
+  }).then((resp) => {
+    console.log(resp)
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 </script>
 

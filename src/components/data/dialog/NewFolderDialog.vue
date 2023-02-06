@@ -19,8 +19,9 @@
 <script setup>
 
 import {reactive, ref, toRefs, watchEffect} from "vue";
+import api from "../../../plugin/axios/config.js";
 
-const emit = defineEmits(['newFolderSubmit','cancelFolderDialog']);
+const emit = defineEmits(['newFolderSubmit', 'cancelFolderDialog']);
 
 const props = defineProps({
   newFolderDialogVisible: {
@@ -42,9 +43,21 @@ watchEffect(() => {
 const onConfirm = () => {
   visible.value = false;
   emit('newFolderSubmit', folderInfo);
+  console.log(folderInfo.name);
+  api({
+    url: "/api/note/new_folder",
+    method: "post",
+    data: {
+      "name": folderInfo.name
+    }
+  }).then((resp) => {
+    console.log(resp);
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 
-const onCancel=()=>{
+const onCancel = () => {
   visible.value = false;
   emit('cancelFolderDialog');
 }
