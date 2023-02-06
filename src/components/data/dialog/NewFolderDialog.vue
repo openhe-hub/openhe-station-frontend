@@ -20,6 +20,7 @@
 
 import {reactive, ref, toRefs, watchEffect} from "vue";
 import api from "../../../plugin/axios/config.js";
+import {ElMessage} from "element-plus";
 
 const emit = defineEmits(['newFolderSubmit', 'cancelFolderDialog']);
 
@@ -43,7 +44,6 @@ watchEffect(() => {
 const onConfirm = () => {
   visible.value = false;
   emit('newFolderSubmit', folderInfo);
-  console.log(folderInfo.name);
   api({
     url: "/api/note/new_folder",
     method: "post",
@@ -51,7 +51,19 @@ const onConfirm = () => {
       "name": folderInfo.name
     }
   }).then((resp) => {
-    console.log(resp);
+    if (resp.data.success) {
+      ElMessage({
+        showClose: true,
+        message: 'Create new folder successfully!',
+        type: 'success',
+      })
+    } else {
+      ElMessage({
+        showClose: true,
+        message: 'Oops, failed to create new folder!',
+        type: 'error',
+      })
+    }
   }).catch((err) => {
     console.log(err);
   })

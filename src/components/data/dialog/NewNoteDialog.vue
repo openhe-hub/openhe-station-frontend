@@ -45,9 +45,9 @@
 </template>
 
 <script setup>
-
 import {reactive, ref, toRefs, watchEffect} from "vue";
 import api from "../../../plugin/axios/config.js";
+import {ElMessage} from 'element-plus'
 
 const emit = defineEmits(['newFileSubmit', 'cancelFileDialog']);
 
@@ -99,7 +99,19 @@ const uploadNewFile = (params) => {
     method: "post",
     data: formData
   }).then((resp) => {
-    console.log(resp)
+    if (resp.data.success) {
+      ElMessage({
+        showClose: true,
+        message: 'Upload new note successfully!',
+        type: 'success',
+      })
+    } else {
+      ElMessage({
+        showClose: true,
+        message: 'Oops, failed to upload new note!',
+        type: 'error',
+      })
+    }
   }).catch((err) => {
     console.log(err);
   })
