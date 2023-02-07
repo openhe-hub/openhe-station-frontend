@@ -2,14 +2,15 @@
   <div id="container">
     <el-dialog v-model="visible" title="New Note">
       <el-form :model="noteInfo" label-width="120px">
-        <el-form-item label="Filename">
+        <el-form-item label="Name">
           <el-input v-model="noteInfo.name" autocomplete="off" placeholder="Input filename"/>
         </el-form-item>
+        <el-form-item label="Filename(*.md)">
+          <el-input v-model="noteInfo.path" autocomplete="off" placeholder="Input filename"/>
+        </el-form-item>
         <el-form-item label="Folder">
-          <el-select v-model="noteInfo.path" placeholder="Select a folder">
-            <el-option label="Web" value="web"/>
-            <el-option label="Java" value="java"/>
-            <el-option label="Linux" value="linux"/>
+          <el-select v-model="noteInfo.parentPath" placeholder="Select a folder">
+            <el-option v-for="path in paths" key="path" :label="path" value="path"/>
           </el-select>
         </el-form-item>
         <el-form-item label="Date">
@@ -45,7 +46,7 @@
 </template>
 
 <script setup>
-import {reactive, ref, toRefs, watchEffect} from "vue";
+import {onMounted, reactive, ref, toRefs, watchEffect} from "vue";
 import api from "../../../plugin/axios/config.js";
 import {ElMessage} from 'element-plus'
 
@@ -63,12 +64,32 @@ const {newNoteDialogVisible} = toRefs(props);
 const visible = ref(newNoteDialogVisible.value);
 let noteInfo = reactive({
   name: "",
-  date: "",
-  tags: "",
+  parentPath: "",
   path: "",
+  date: "",
+  tags: ""
 });
 let fileRef = ref();
 
+// query parent paths
+let paths = reactive([]);
+const queryPath = () => {
+  api({
+    url: "/api/note/folder",
+    method: "get"
+  }).then((resp) => {
+    paths.splice(0, paths.length);
+    resp.data.forEach(i => paths.push(i));
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+onMounted(() => {
+  queryPath();
+})
+
+
+// watch visible
 watchEffect(() => {
   visible.value = newNoteDialogVisible.value;
 })
@@ -86,12 +107,12 @@ const onCancel = () => {
 }
 
 // upload new file
-
 const uploadNewFile = (params) => {
   let formData = new FormData();
   formData.append("name", noteInfo.name);
   formData.append("tags", noteInfo.tags);
   formData.append("path", noteInfo.path);
+  formData.append("parentPath", noteInfo.parentPath);
   formData.append("date", noteInfo.date);
   formData.append("file", params.file);
   api({
