@@ -1,4 +1,4 @@
-### v-0.1
+### v-0.1 2023-02-01
 * finish main function & UI 
   1. Vue+Vite project structure
   2. VueRouter router structure
