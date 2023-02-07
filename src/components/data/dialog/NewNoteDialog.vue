@@ -10,7 +10,7 @@
         </el-form-item>
         <el-form-item label="Folder">
           <el-select v-model="noteInfo.parentPath" placeholder="Select a folder">
-            <el-option v-for="path in paths" key="path" :label="path" value="path"/>
+            <el-option v-for="path in paths" key="path" :label="path" :value="path"/>
           </el-select>
         </el-form-item>
         <el-form-item label="Date">
