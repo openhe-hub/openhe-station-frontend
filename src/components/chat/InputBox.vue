@@ -13,12 +13,12 @@
         </el-scrollbar>
       </el-col>
       <el-col :span="3" :offset="1">
-        <el-button type="primary" plain round :icon="Position">
+        <el-button type="primary" plain round :icon="Position" @click="onSend">
           Send
         </el-button>
       </el-col>
       <el-col :span="3" :offset="1">
-        <el-button type="danger" plain round :icon="Delete">
+        <el-button type="danger" plain round :icon="Delete" @click="onDelete">
           Delete
         </el-button>
       </el-col>
@@ -28,11 +28,42 @@
 
 <script setup>
 import {ref} from "vue";
-import {Position,Delete} from "@element-plus/icons-vue";
-
+import {Position, Delete} from "@element-plus/icons-vue";
+import api from "../../plugin/axios/config.js";
+// emit
+const emit = defineEmits(["send", "delete"])
+// data
 const question = ref("");
+const answer = ref("");
 const config = {
   maxRows: 3,
+}
+// api
+async function query(){
+  await api({
+    url: "/api/chat",
+    method: "post",
+    data: {
+      "question": question.value
+    }
+  }).then((resp) => {
+    console.log(resp)
+    answer.value = resp.data.resp
+    let status = resp.data.success
+    if (!status) answer.value="Error occurs! Please retry"
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+// event handler
+// use async/await to wait respond
+async function onSend (){
+  await query()
+  emit("send", question.value, answer.value)
+}
+
+const onDelete = () => {
+  emit("delete")
 }
 </script>
 
