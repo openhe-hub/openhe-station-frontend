@@ -32,7 +32,7 @@
             </el-dropdown>
           </el-col>
           <el-col :span="1">
-            <el-avatar :src="avatar"/>
+            <el-avatar :src="avatar" @click="avatarOnClick"/>
           </el-col>
         </el-row>
       </el-col>
@@ -60,6 +60,10 @@ const list = [
 ]
 
 const searchText = ref();
+
+const avatarOnClick=()=>{
+  window.open('https://github.com/openhe-hub');
+}
 </script>
 
 <style scoped>
