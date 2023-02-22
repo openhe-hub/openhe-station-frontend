@@ -6,6 +6,7 @@
           :curr_answer="curr_answer"
       />
     </el-row>
+
     <el-row class="input-box-input">
       <el-col :offset="3" :span="18">
         <InputBox

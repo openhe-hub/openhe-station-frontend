@@ -1,7 +1,7 @@
 <template>
   <div id="input-box-container">
     <el-row>
-      <el-col :span="15">
+      <el-col :span="17">
         <el-scrollbar height="100%">
           <el-input
               v-model="question"
@@ -12,15 +12,35 @@
           />
         </el-scrollbar>
       </el-col>
-      <el-col :span="3" :offset="1">
-        <el-button type="primary" plain round :icon="Position" @click="onSend">
-          Send
-        </el-button>
+      <el-col :span="2" :offset="1">
+        <el-tooltip
+            content="Send Message"
+            effect="light"
+            placement="top-start"
+        >
+          <el-button type="primary" plain round :icon="Position" @click="onSend">
+          </el-button>
+        </el-tooltip>
       </el-col>
-      <el-col :span="3" :offset="1">
-        <el-button type="danger" plain round :icon="Delete" @click="onDelete">
-          Delete
-        </el-button>
+      <el-col :span="2" :offset="0">
+        <el-tooltip
+            content="New topic"
+            effect="light"
+            placement="top"
+        >
+          <el-button type="warning" plain round :icon="Refresh" @click="onDelete">
+          </el-button>
+        </el-tooltip>
+      </el-col>
+      <el-col :span="2" :offset="0">
+        <el-tooltip
+            content="Delete Text"
+            effect="light"
+            placement="top-end"
+        >
+          <el-button type="danger" plain round :icon="Delete" @click="onDelete">
+          </el-button>
+        </el-tooltip>
       </el-col>
     </el-row>
   </div>
@@ -28,7 +48,7 @@
 
 <script setup>
 import {ref} from "vue";
-import {Position, Delete} from "@element-plus/icons-vue";
+import {Position, Delete, Refresh} from "@element-plus/icons-vue";
 import api from "../../plugin/axios/config.js";
 // emit
 const emit = defineEmits(["send", "delete"])
@@ -38,8 +58,9 @@ const answer = ref("");
 const config = {
   maxRows: 3,
 }
+
 // api
-async function query(){
+async function query() {
   await api({
     url: "/api/chat",
     method: "post",
@@ -50,14 +71,16 @@ async function query(){
     console.log(resp)
     answer.value = resp.data.resp
     let status = resp.data.success
-    if (!status) answer.value="Error occurs! Please retry"
+    if (!status) answer.value = "Error occurs! Please retry"
   }).catch((err) => {
     console.log(err)
   })
 }
+
 // event handler
 // use async/await to wait respond
-async function onSend (){
+async function onSend() {
+  question.value = ""
   await query()
   emit("send", question.value, answer.value)
 }
@@ -77,7 +100,7 @@ div#input-box-container {
   // horizontal
   text-align: center;
 
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+  //box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
   //border-radius: 8px;
 
   .input {
