@@ -4,19 +4,18 @@
       <div v-for="(content,idx) in chatList"
            :key="idx"
            class="chatbox"
-           :style="{backgroundColor:(!(idx%2)?'white':'#ebebeb')}"
+           :style="{backgroundColor:(isUser(idx)?'white':'white')}"
       >
         <el-row>
-          <el-col :span="2" v-if="!(idx%2)">
-            <UserIcon></UserIcon>
-          </el-col>
-          <el-col :span="2" v-else>
-            <RobotIcon></RobotIcon>
+          <el-col :span="2">
+            <UserIcon v-if="isUser(idx)"></UserIcon>
+            <RobotIcon v-else></RobotIcon>
           </el-col>
           <el-col :span="22">
-            <div id="answer-container">
+            <div id="answer-container" v-if="isUser(idx)">
               {{ content }}
             </div>
+            <MarkdownBox :text="content" v-else/>
           </el-col>
         </el-row>
       </div>
@@ -26,9 +25,10 @@
 </template>
 
 <script setup>
-import {reactive, ref, toRefs, watchEffect} from "vue";
+import {computed, reactive, ref, toRefs, watchEffect} from "vue";
 import UserIcon from "../../assets/icon/UserIcon.vue";
 import RobotIcon from "../../assets/icon/RobotIcon.vue";
+import MarkdownBox from "./MarkdownBox.vue";
 
 const props = defineProps({
   curr_question: {
@@ -51,6 +51,10 @@ watchEffect(() => {
     chatList.push(curr_answer.value)
   }
 })
+
+const isUser = (idx) => {
+  return !(idx % 2);
+}
 </script>
 
 <style scoped lang="less">
@@ -69,7 +73,7 @@ div#chatbox-container {
   }
 }
 
-div#answer-container{
+div#answer-container {
   margin-top: 4px;
   margin-bottom: 5px;
 }

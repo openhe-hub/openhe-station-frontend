@@ -1,7 +1,7 @@
 <template>
   <div id="input-box-container">
     <el-row>
-      <el-col :span="17">
+      <el-col :span="15">
         <el-scrollbar height="100%">
           <el-input
               v-model="question"
@@ -36,9 +36,19 @@
         <el-tooltip
             content="Delete Text"
             effect="light"
-            placement="top-end"
+            placement="top"
         >
           <el-button type="danger" plain round :icon="Delete" @click="onDelete">
+          </el-button>
+        </el-tooltip>
+      </el-col>
+      <el-col :span="2" :offset="0">
+        <el-tooltip
+            content="Download Chat"
+            effect="light"
+            placement="top-end"
+        >
+          <el-button type="success" plain round :icon="Download" @click="onDelete">
           </el-button>
         </el-tooltip>
       </el-col>
@@ -48,7 +58,7 @@
 
 <script setup>
 import {ref} from "vue";
-import {Position, Delete, Refresh} from "@element-plus/icons-vue";
+import {Position, Delete, Refresh,Download} from "@element-plus/icons-vue";
 import api from "../../plugin/axios/config.js";
 // emit
 const emit = defineEmits(["send", "delete"])
@@ -80,13 +90,14 @@ async function query() {
 // event handler
 // use async/await to wait respond
 async function onSend() {
-  question.value = ""
   await query()
   emit("send", question.value, answer.value)
+  question.value = ""
 }
 
 const onDelete = () => {
   emit("delete")
+  question.value = ""
 }
 </script>
 
@@ -99,9 +110,6 @@ div#input-box-container {
 
   // horizontal
   text-align: center;
-
-  //box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
-  //border-radius: 8px;
 
   .input {
     :deep(.el-textarea__inner) {

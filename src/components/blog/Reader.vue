@@ -2,7 +2,7 @@
   <div id="reader-container">
     <md-editor v-model="state.text"
                :theme="'light'"
-               preview-theme="vuepress"
+               preview-theme="smart-blue"
                :code-theme="state.theme"
                style="height: 100%"
                preview-only>
@@ -49,7 +49,7 @@ onMounted(() => {
 // md-editor-v3 properties
 const state = reactive({
   text: '',
-  theme: 'github'
+  theme: 'atom'
 });
 
 // watch change
